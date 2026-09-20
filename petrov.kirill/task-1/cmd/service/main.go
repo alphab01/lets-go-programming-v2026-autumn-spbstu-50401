@@ -18,23 +18,23 @@ func main() {
 	_, err = fmt.Scan(&s)
 	if err != nil {
 		fmt.Println("Error, cant read string")
-    return
+		return
 	}
 
-  switch (s) {
-    case "+":
-      fmt.Println(a + b)
-    case "-":
-      fmt.Println(a - b)
-    case "/":
-      if (b != 0) {
-        fmt.Println(a/b)
-      } else {
-        fmt.Println("Division by zero")
-      }
-    case "*":
-      fmt.Println(a * b)
-    default:
-      fmt.Println("Invalid operation")
-  }
+	switch s {
+	case "+":
+		fmt.Println(a + b)
+	case "-":
+		fmt.Println(a - b)
+	case "/":
+		if b != 0 {
+			fmt.Println(a / b)
+		} else {
+			fmt.Println("Division by zero")
+		}
+	case "*":
+		fmt.Println(a * b)
+	default:
+		fmt.Println("Invalid operation")
+	}
 }
