@@ -28,7 +28,7 @@ func main() {
 		fmt.Println(a - b)
 	case "/":
 		if b == 0 {
-			fmt.Println("Error, division by zero")
+			fmt.Println("Division by zero")
 			return
 		}
 		fmt.Println(a / b)
