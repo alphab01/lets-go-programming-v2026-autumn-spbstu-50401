@@ -27,11 +27,11 @@ func main() {
 	case "-":
 		fmt.Println(a - b)
 	case "/":
-		if b != 0 {
-			fmt.Println(a / b)
-		} else {
-			fmt.Println("Division by zero")
+		if b == 0 {
+			fmt.Println("Error, division by zero")
+			return
 		}
+		fmt.Println(a / b)
 	case "*":
 		fmt.Println(a * b)
 	default:
