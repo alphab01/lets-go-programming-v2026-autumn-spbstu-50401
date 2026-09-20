@@ -20,19 +20,21 @@ func main() {
 		fmt.Println("Error, cant read string")
     return
 	}
-	if s == "+" {
-		fmt.Println(a + b)
-	} else if s == "-" {
-		fmt.Println(a - b)
-	} else if s == "/" {
-		if b != 0 {
-			fmt.Println(a / b)
-		} else {
-			fmt.Println("Division by zer  o")
-		}
-	} else if s == "*" {
-		fmt.Println(a * b)
-	} else {
-		fmt.Println("Invalid operation")
-	}
+
+  switch (s) {
+    case "+":
+      fmt.Println(a + b)
+    case "-":
+      fmt.Println(a - b)
+    case "/":
+      if (b != 0) {
+        fmt.Println(a/b)
+      } else {
+        fmt.Println("Division by zero")
+      }
+    case "*":
+      fmt.Println(a * b)
+    default:
+      fmt.Println("Invalid operation")
+  }
 }
