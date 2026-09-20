@@ -17,7 +17,8 @@ func main() {
 	var s string
 	_, err = fmt.Scan(&s)
 	if err != nil {
-		fmt.Println("err")
+		fmt.Println("Error, cant read string")
+    return
 	}
 	if s == "+" {
 		fmt.Println(a + b)
@@ -27,7 +28,7 @@ func main() {
 		if b != 0 {
 			fmt.Println(a / b)
 		} else {
-			fmt.Println("Division by zero")
+			fmt.Println("Division by zer  o")
 		}
 	} else if s == "*" {
 		fmt.Println(a * b)
