@@ -23,7 +23,7 @@ func printt(left int, right int) {
 		fmt.Println(left)
 	} else {
 		fmt.Println(eror)
-  }
+	}
 }
 
 func main() {
@@ -39,9 +39,9 @@ func main() {
 	}
 	for _ = range Num {
 		_, err = fmt.Scan(&Kolichestvo)
-    if err != nil {
-      fmt.Println(err)
-    }
+		if err != nil {
+			fmt.Println(err)
+		}
 		for j := range Kolichestvo {
 			_, err = fmt.Scan(&bolshemenshe)
 			if err != nil {
