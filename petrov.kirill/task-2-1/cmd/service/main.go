@@ -5,24 +5,25 @@ import (
 )
 
 func ismore(str string) bool {
-	if string(str[0]) == ">" {
-		return true
-	}
-	return false
+	return string(str[0]) == ">"
 }
 
+const mini = 15
+const maxi = 30
+const eror = -1
+
 func printt(left int, right int) {
-	if right > 30 {
-		right = 30
+	if right > maxi {
+		right = maxi
 	}
-	if left < 15 {
-		left = 15
+	if left < mini {
+		left = mini
 	}
 	if left <= right {
 		fmt.Println(left)
 	} else {
-		fmt.Println(-1)
-	}
+		fmt.Println(eror)
+  }
 }
 
 func main() {
@@ -37,7 +38,10 @@ func main() {
 		fmt.Println(err)
 	}
 	for _ = range Num {
-		fmt.Scan(&Kolichestvo)
+		_, err = fmt.Scan(&Kolichestvo)
+    if err != nil {
+      fmt.Println(err)
+    }
 		for j := range Kolichestvo {
 			_, err = fmt.Scan(&bolshemenshe)
 			if err != nil {
@@ -50,10 +54,10 @@ func main() {
 			if j == 0 {
 				if ismore(bolshemenshe) {
 					left = add
-					right = 30
+					right = maxi
 				} else {
 					right = add
-					left = 15
+					left = mini
 				}
 			} else {
 				if ismore(bolshemenshe) {
