@@ -19,6 +19,7 @@ func main() {
 		}
 
 		var left, right, add int
+
 		var str string
 
 		left = 15
