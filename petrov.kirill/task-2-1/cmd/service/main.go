@@ -4,41 +4,41 @@ import (
 	"fmt"
 )
 
-func ismore(s string) bool {
-	if string(s[0]) == ">" {
+func ismore(str string) bool {
+	if string(str[0]) == ">" {
 		return true
 	}
 	return false
 }
 
-func printt(l int, r int) {
-	if r > 30 {
-		r = 30
+func printt(left int, right int) {
+	if right > 30 {
+		right = 30
 	}
-	if l < 15 {
-		l = 15
+	if left < 15 {
+		left = 15
 	}
-	if l <= r {
-		fmt.Println(l)
+	if left <= right {
+		fmt.Println(left)
 	} else {
 		fmt.Println(-1)
 	}
 }
 
 func main() {
-	var N int
+	var Num int
 	var Kolichestvo int
 	var bolshemenshe string
 	var add int
-	var l int
-	var r int
-	_, err := fmt.Scan(&N)
+	var left int
+	var right int
+	_, err := fmt.Scan(&Num)
 	if err != nil {
 		fmt.Println(err)
 	}
-	for i := 0; i < N; i++ {
+	for _ = range Num {
 		fmt.Scan(&Kolichestvo)
-		for j := 0; j < Kolichestvo; j++ {
+		for j := range Kolichestvo {
 			_, err = fmt.Scan(&bolshemenshe)
 			if err != nil {
 				fmt.Println(err)
@@ -49,24 +49,24 @@ func main() {
 			}
 			if j == 0 {
 				if ismore(bolshemenshe) {
-					l = add
-					r = 30
+					left = add
+					right = 30
 				} else {
-					r = add
-					l = 15
+					right = add
+					left = 15
 				}
 			} else {
 				if ismore(bolshemenshe) {
-					if add > l {
-						l = add
+					if add > left {
+						left = add
 					}
 				} else {
-					if add < r {
-						r = add
+					if add < right {
+						right = add
 					}
 				}
 			}
-			printt(l, r)
+			printt(left, right)
 		}
 	}
 }
