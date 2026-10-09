@@ -8,9 +8,10 @@ func ismore(str string) bool {
 	return string(str[0]) == ">"
 }
 
-const mini = 15
-const maxi = 30
-const eror = -1
+const (
+  mini = 15
+  maxi = 30
+)
 
 func printt(left int, right int) {
 	if right > maxi {
@@ -22,7 +23,7 @@ func printt(left int, right int) {
 	if left <= right {
 		fmt.Println(left)
 	} else {
-		fmt.Println(eror)
+		fmt.Println(-1)
 	}
 }
 
@@ -42,7 +43,7 @@ func main() {
 		if err != nil {
 			fmt.Println(err)
 		}
-		for j := range Kolichestvo {
+		for iter := range Kolichestvo {
 			_, err = fmt.Scan(&bolshemenshe)
 			if err != nil {
 				fmt.Println(err)
@@ -51,7 +52,7 @@ func main() {
 			if err != nil {
 				fmt.Println(err)
 			}
-			if j == 0 {
+			if iter == 0 {
 				if ismore(bolshemenshe) {
 					left = add
 					right = maxi
