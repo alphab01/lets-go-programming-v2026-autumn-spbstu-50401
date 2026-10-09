@@ -4,6 +4,16 @@ import (
 	"fmt"
 )
 
+func main() {
+	var num, kol int
+	_, err := fmt.Scan(&num, &kol)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+}
+
+/*
 func ismore(str string) bool {
 	return string(str[0]) == ">"
 }
@@ -29,9 +39,9 @@ func printt(left int, right int) {
 	}
 }
 
-func gogo(Kolichestvo int, bolshemenshe string, add int) {
+func gogo(kolichestvo int, bolshemenshe string, add int) {
 	var left, right int
-	for iter := range Kolichestvo {
+	for iter := range kolichestvo {
 		_, err := fmt.Scan(&bolshemenshe)
 		if err != nil {
 			fmt.Println(err)
@@ -63,26 +73,27 @@ func gogo(Kolichestvo int, bolshemenshe string, add int) {
 	}
 }
 
-func run(Num int, Kolichestvo int, bolshemenshe string, add int, left int, right int) {
-	_, err := fmt.Scan(&Num)
+func run(num int, kolichestvo int, bolshemenshe string, add int, left int, right int) {
+	_, err := fmt.Scan(&num)
 	if err != nil {
 		fmt.Println(err)
 	}
-	for range Num {
-		_, err = fmt.Scan(&Kolichestvo)
+	for range num {
+		_, err = fmt.Scan(&kolichestvo)
 		if err != nil {
 			fmt.Println(err)
 		}
-		gogo(Kolichestvo, bolshemenshe, add)
+		gogo(kolichestvo, bolshemenshe, add)
 	}
 }
 
 func main() {
-	var Num int
-	var Kolichestvo int
+	var num int
+	var kolichestvo int
 	var bolshemenshe string
 	var add int
 	var left int
 	var right int
-	run(Num, Kolichestvo, bolshemenshe, add, left, right)
+	run(num, kolichestvo, bolshemenshe, add, left, right)
 }
+*/
