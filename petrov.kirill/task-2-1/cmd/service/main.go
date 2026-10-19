@@ -10,12 +10,14 @@ func main() {
 	_, err := fmt.Scan(&num)
 	if err != nil {
 		fmt.Println(err)
+    return
 	}
 
 	for range num {
 		_, err = fmt.Scan(&kol)
 		if err != nil {
 			fmt.Println(err)
+      return
 		}
 
 		var left, right, add int
@@ -29,6 +31,7 @@ func main() {
 			_, err = fmt.Scan(&str, &add)
 			if err != nil {
 				fmt.Println(err)
+        return
 			}
 
 			if string(str[0]) == ">" && add > left {
