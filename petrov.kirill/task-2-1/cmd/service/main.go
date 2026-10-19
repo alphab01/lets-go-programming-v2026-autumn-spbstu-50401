@@ -34,9 +34,14 @@ func main() {
         return
 			}
 
-			if string(str[0]) == ">" && add > left {
+      if len(str) != 2 {
+        fmt.Println("err")
+        return
+      }
+
+			if string(str[0]) == ">" && string(str[1]) == "=" && add > left {
 				left = add
-			} else if string(str[0]) == "<" && add < right {
+			} else if string(str[0]) == "<" && string(str[1]) == "=" && add < right {
 				right = add
 			}
 
