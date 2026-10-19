@@ -25,6 +25,7 @@ func main() {
 		_, err = fmt.Scan(&kol)
 		if err != nil {
 			fmt.Println(err)
+
 			return
 		}
 
@@ -39,11 +40,7 @@ func main() {
 			_, err = fmt.Scan(&str, &add)
 			if err != nil {
 				fmt.Println(err)
-				return
-			}
 
-			if len(str) != 2 {
-				fmt.Println("err")
 				return
 			}
 
