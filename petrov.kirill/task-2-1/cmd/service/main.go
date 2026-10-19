@@ -18,6 +18,7 @@ func main() {
 	_, err := fmt.Scan(&num)
 	if err != nil {
 		fmt.Println(err)
+
 		return
 	}
 
@@ -49,6 +50,7 @@ func main() {
 			} else if string(str[0]) == "<" && string(str[1]) == "=" && add < right {
 				right = add
 			}
+
 			whattemp(left, right)
 		}
 	}
