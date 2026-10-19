@@ -4,20 +4,28 @@ import (
 	"fmt"
 )
 
+func whattemp(left int, right int) {
+	if left <= right {
+		fmt.Println(left)
+	} else {
+		fmt.Println(-1)
+	}
+}
+
 func main() {
 	var num, kol int
 
 	_, err := fmt.Scan(&num)
 	if err != nil {
 		fmt.Println(err)
-    return
+		return
 	}
 
 	for range num {
 		_, err = fmt.Scan(&kol)
 		if err != nil {
 			fmt.Println(err)
-      return
+			return
 		}
 
 		var left, right, add int
@@ -31,25 +39,20 @@ func main() {
 			_, err = fmt.Scan(&str, &add)
 			if err != nil {
 				fmt.Println(err)
-        return
+				return
 			}
 
-      if len(str) != 2 {
-        fmt.Println("err")
-        return
-      }
+			if len(str) != 2 {
+				fmt.Println("err")
+				return
+			}
 
 			if string(str[0]) == ">" && string(str[1]) == "=" && add > left {
 				left = add
 			} else if string(str[0]) == "<" && string(str[1]) == "=" && add < right {
 				right = add
 			}
-
-			if left <= right {
-				fmt.Println(left)
-			} else {
-				fmt.Println(-1)
-			}
+			whattemp(left, right)
 		}
 	}
 }
