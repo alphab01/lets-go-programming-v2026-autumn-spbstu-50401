@@ -4,16 +4,14 @@ import (
   "fmt"
 )
 
-func gsort(d []int) []int {
-  i := 0
-  for ; i < len(d) - 1; {
-    if (d[i] > d[i + 1]) {
-      c := d[i + 1]
-      d[i + 1] = d[i]
-      d[i] = c
-      i--
-    } else {
-      i++
+func bsort(d []int) []int {
+  for i := 0; i < len(d); i++ {
+    for j := 0; j < len(d) - 1; j++ {
+      if (d[j] < d[j + 1]) {
+        c := d[j + 1]
+        d[j + 1] = d[j]
+        d[j] = c
+      }
     }
   }
   return d
@@ -27,4 +25,7 @@ func main() {
     fmt.Scan(&b)
     d = append(d, b)
   }
+  fmt.Scan(&b)
+  d = bsort(d)
+  fmt.Println(d)
 }
