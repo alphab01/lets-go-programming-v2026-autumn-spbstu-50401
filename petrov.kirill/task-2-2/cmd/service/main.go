@@ -5,7 +5,7 @@ import (
 )
 
 type Interface interface {
-  sort.Interface
+  //sort.Interface
   Push(x interface{})
   Pop() interface{}
 }
@@ -25,7 +25,11 @@ func bsort(d []int) []int {
 
 func main() {
   var a, b int
-  fmt.Scan(&a)
+  _, err := fmt.Scan(&a)
+  if (err != nil) {
+    fmt.Println(err)
+    return
+  }
   var d []int
   for i := 0; i < a; i++ {
     fmt.Scan(&b)
