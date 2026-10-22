@@ -14,12 +14,12 @@ func (b bludo) get(i int) int{
   return b[i]
 }
 
-func (b bludo) add(a int) {
-  b = append(b, a)
+func (b *bludo) add(a int) {
+  *b = append(*b, a)
 }
 
-func (b bludo) fix(i int, a int) {
-  b[i] = a
+func (b *bludo) fix(i int, a int) {
+  (*b)[i] = a
 }
 
 func bsort(d bludo) bludo {
@@ -49,6 +49,5 @@ func main() {
   }
   fmt.Scan(&b)
   d = bsort(d)
-  fmt.Println(d.Len())
   fmt.Println(d.get(b - 1))
 }
