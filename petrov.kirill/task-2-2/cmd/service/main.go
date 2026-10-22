@@ -27,5 +27,5 @@ func main() {
   }
   fmt.Scan(&b)
   d = bsort(d)
-  fmt.Println(d)
+  fmt.Println(d[b - 1])
 }
