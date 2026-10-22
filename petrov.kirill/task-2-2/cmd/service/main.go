@@ -18,13 +18,17 @@ func (b bludo) add(a int) {
   b = append(b, a)
 }
 
-func bsort(d []int) []int {
-  for i := 0; i < len(d); i++ {
-    for j := 0; j < len(d) - 1; j++ {
-      if (d[j] < d[j + 1]) {
-        c := d[j + 1]
-        d[j + 1] = d[j]
-        d[j] = c
+func (b bludo) fix(i int, a int) {
+  b[i] = a
+}
+
+func bsort(d bludo) bludo {
+  for i := 0; i < d.Len(); i++ {
+    for j := 0; j < d.Len() - 1; j++ {
+      if (d.get(j) < d.get(j + 1)) {
+        c := d.get(j + 1)
+        d.fix(j + 1, d.get(j))
+        d.fix(j, c)
       }
     }
   }
@@ -38,12 +42,13 @@ func main() {
     fmt.Println(err)
     return
   }
-  var d []int
+  d := bludo{}
   for i := 0; i < a; i++ {
     fmt.Scan(&b)
-    d = append(d, b)
+    d.add(b)
   }
   fmt.Scan(&b)
   d = bsort(d)
-  fmt.Println(d[b - 1])
+  fmt.Println(d.Len())
+  fmt.Println(d.get(b - 1))
 }
