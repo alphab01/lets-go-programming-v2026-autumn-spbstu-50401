@@ -7,10 +7,12 @@ import (
 type bludo []int
 
 func (b bludo) Len() int {
+
 	return len(b)
 }
 
 func (b bludo) get(i int) int {
+
 	return b[i]
 }
 
@@ -32,6 +34,7 @@ func bsort(d bludo) bludo {
 			}
 		}
 	}
+
 	return d
 }
 
@@ -40,6 +43,7 @@ func main() {
 	_, err := fmt.Scan(&a)
 	if err != nil {
 		fmt.Println(err)
+
 		return
 	}
 	d := bludo{}
