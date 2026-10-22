@@ -5,5 +5,11 @@ import (
 )
 
 func main() {
-  fmt.Println("I love Gopher")
+  var a, b int
+  fmt.Scan(&a)
+  var d []int
+  for i := 0; i < a; i++ {
+    fmt.Scan(&b)
+    d = append(d, b)
+  }
 }
