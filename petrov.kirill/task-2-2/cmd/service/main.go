@@ -4,6 +4,12 @@ import (
   "fmt"
 )
 
+type Interface interface {
+  sort.Interface
+  Push(x interface{})
+  Pop() interface{}
+}
+
 func bsort(d []int) []int {
   for i := 0; i < len(d); i++ {
     for j := 0; j < len(d) - 1; j++ {
