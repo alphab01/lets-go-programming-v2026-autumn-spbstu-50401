@@ -38,6 +38,7 @@ func bsort(dat bludo) bludo {
 
 func main() {
 	var aaa, bbb int
+
 	_, err := fmt.Scan(&aaa)
 	if err != nil {
 		fmt.Println(err)
@@ -45,6 +46,7 @@ func main() {
 		return
 	}
 	dat := bludo{}
+
 	for range aaa {
 		_, err = fmt.Scan(&bbb)
     if err != nil {
@@ -60,6 +62,7 @@ func main() {
 
     return
   }
+
 	dat = bsort(dat)
 	fmt.Println(dat.get(bbb - 1))
 }
