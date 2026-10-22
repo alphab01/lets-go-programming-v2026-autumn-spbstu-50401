@@ -4,10 +4,10 @@ import (
   "fmt"
 )
 
-type Interface interface {
-  //sort.Interface
-  Push(x interface{})
-  Pop() interface{}
+type bludo []int
+
+func (b bludo) Len() int{
+  return len(b)
 }
 
 func bsort(d []int) []int {
