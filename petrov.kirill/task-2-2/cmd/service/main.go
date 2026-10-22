@@ -48,10 +48,20 @@ func main() {
 	}
 	d := bludo{}
 	for range a {
-		fmt.Scan(&b)
+		_, err = fmt.Scan(&b)
+    if err != nil {
+      fmt.Println(err)
+
+      return
+    }
 		d.add(b)
 	}
-	fmt.Scan(&b)
+	_, err = fmt.Scan(&b)
+  if err != nil {
+    fmt.Println(err)
+
+    return
+  }
 	d = bsort(d)
 	fmt.Println(d.get(b - 1))
 }
