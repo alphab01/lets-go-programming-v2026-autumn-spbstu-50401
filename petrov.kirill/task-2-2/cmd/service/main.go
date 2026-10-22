@@ -10,6 +10,14 @@ func (b bludo) Len() int{
   return len(b)
 }
 
+func (b bludo) get(i int) int{
+  return b[i]
+}
+
+func (b bludo) add(a int) {
+  b = append(b, a)
+}
+
 func bsort(d []int) []int {
   for i := 0; i < len(d); i++ {
     for j := 0; j < len(d) - 1; j++ {
