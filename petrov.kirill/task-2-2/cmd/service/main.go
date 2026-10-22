@@ -6,62 +6,60 @@ import (
 
 type bludo []int
 
-func (b bludo) Len() int {
-
-	return len(b)
+func (bld *bludo) Len() int {
+	return len(*bld)
 }
 
-func (b bludo) get(i int) int {
-
-	return b[i]
+func (bld *bludo) get(i int) int {
+	return (*bld)[i]
 }
 
-func (b *bludo) add(a int) {
-	*b = append(*b, a)
+func (bld *bludo) add(addd int) {
+	*bld = append(*bld, addd)
 }
 
-func (b *bludo) fix(i int, a int) {
-	(*b)[i] = a
+func (bld *bludo) fix(iii int, addd int) {
+	(*bld)[iii] = addd
 }
 
-func bsort(d bludo) bludo {
-	for range d.Len() {
-		for j := range d.Len()-1 {
-			if d.get(j) < d.get(j+1) {
-				c := d.get(j + 1)
-				d.fix(j+1, d.get(j))
-				d.fix(j, c)
+func bsort(dat bludo) bludo {
+	for range dat.Len() {
+		for jjj := range dat.Len() - 1 {
+			if dat.get(jjj) < dat.get(jjj+1) {
+				ccc := dat.get(jjj + 1)
+				dat.fix(jjj+1, dat.get(jjj))
+				dat.fix(jjj, ccc)
 			}
 		}
 	}
 
-	return d
+	return dat
 }
 
 func main() {
-	var a, b int
-	_, err := fmt.Scan(&a)
+	var aaa, bbb int
+	_, err := fmt.Scan(&aaa)
 	if err != nil {
 		fmt.Println(err)
 
 		return
 	}
-	d := bludo{}
-	for range a {
-		_, err = fmt.Scan(&b)
+	dat := bludo{}
+	for range aaa {
+		_, err = fmt.Scan(&bbb)
     if err != nil {
       fmt.Println(err)
 
       return
     }
-		d.add(b)
+		dat.add(bbb)
 	}
-	_, err = fmt.Scan(&b)
+	_, err = fmt.Scan(&bbb)
   if err != nil {
     fmt.Println(err)
 
     return
   }
-	d = bsort(d)
-	fmt.Println(d.get(b - 1))
+	dat = bsort(dat)
+	fmt.Println(dat.get(bbb - 1))
 }
