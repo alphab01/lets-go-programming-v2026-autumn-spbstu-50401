@@ -25,7 +25,7 @@ func main() {
 	for range num {
 		_, err = fmt.Scan(&kol)
 		if err != nil {
-			fmt.Println("error of read kol"err)
+			fmt.Println("error of read kol", err)
 
 			return
 		}
