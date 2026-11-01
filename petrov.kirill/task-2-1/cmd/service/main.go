@@ -17,7 +17,7 @@ func main() {
 
 	_, err := fmt.Scan(&num)
 	if err != nil {
-		fmt.Println("errof of read num", err)
+		fmt.Errorf("error read count of department: %w", err)
 
 		return
 	}
@@ -25,7 +25,7 @@ func main() {
 	for range num {
 		_, err = fmt.Scan(&kol)
 		if err != nil {
-			fmt.Println("error of read kol", err)
+			fmt.Errorf("error read count of workers in depatment: %w", err)
 
 			return
 		}
@@ -40,7 +40,7 @@ func main() {
 		for range kol {
 			_, err = fmt.Scan(&str, &add)
 			if err != nil {
-				fmt.Println("str && add reading error", err)
+				fmt.Errorf("error of reading choose of worker + temp: %w", err)
 
 				return
 			}
