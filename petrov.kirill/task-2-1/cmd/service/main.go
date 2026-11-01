@@ -45,9 +45,9 @@ func main() {
 				return
 			}
 
-			if string(str[0]) == ">" && string(str[1]) == "=" && add > left {
+			if str[:2] == ">=" && add > left {
 				left = add
-			} else if string(str[0]) == "<" && string(str[1]) == "=" && add < right {
+			} else if str[:2] == "<=" && add < right {
 				right = add
 			}
 
