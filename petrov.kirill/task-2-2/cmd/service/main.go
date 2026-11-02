@@ -23,6 +23,14 @@ func (bld bludo) Swap(i int, j int) {
   bld[j] = swp
 }
 
+func (bld *bludo) Push (x interface{}) {
+  *bld = append(*bld, x)
+}
+
+func (bld *bludo) Pop() interface{}{
+  return (*bld)[:len(*bld) - 1]
+}
+
 func main() {
 	var aaa, bbb int
 
