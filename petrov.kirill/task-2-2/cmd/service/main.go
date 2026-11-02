@@ -2,38 +2,25 @@ package main
 
 import (
 	"fmt"
+  "container/heap"
 )
 
 type bludo []int
 
-func (bld *bludo) Len() int {
-	return len(*bld)
+
+
+func (bld bludo) Len() int {
+	return len(bld)
 }
 
-func (bld *bludo) get(i int) int {
-	return (*bld)[i]
+func (bld bludo) Less(j int, i int) bool {
+	return bld[i] < bld[j]
 }
 
-func (bld *bludo) add(addd int) {
-	*bld = append(*bld, addd)
-}
-
-func (bld *bludo) fix(iii int, addd int) {
-	(*bld)[iii] = addd
-}
-
-func bsort(dat bludo) bludo {
-	for range dat.Len() {
-		for jjj := range dat.Len() - 1 {
-			if dat.get(jjj) < dat.get(jjj+1) {
-				ccc := dat.get(jjj + 1)
-				dat.fix(jjj+1, dat.get(jjj))
-				dat.fix(jjj, ccc)
-			}
-		}
-	}
-
-	return dat
+func (bld bludo) Swap(i int, j int) {
+	swp := bld[i]
+  bld[i] = bld[j]
+  bld[j] = swp
 }
 
 func main() {
