@@ -7,6 +7,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
 	"strconv"
 
 	"golang.org/x/net/html/charset"
@@ -76,18 +77,6 @@ func VtJ(vals []Valu) []jsonsave {
 	return js
 }
 
-func getdir(s string) string {
-	s1 := ""
-	for i := 0; i < len(s); i++ {
-		if (string(s[i]) == "/") {
-			return s1
-		} else {
-			s1 += string(s[i])
-		}
-	}
-	return s1
-}
-
 func main() {
 	yml := flag.String("config", "", "way to config")
 	flag.Parse()
@@ -108,7 +97,7 @@ func main() {
 	fmt.Println(js[0].Charc)
 	aaa, _ := json.Marshal(js)
 	fmt.Println(string(aaa))
-	err := os.Mkdir(getdir(conf.Out), 0777)
+	err := os.MkdirAll(filepath.Dir(conf.Out), 0777)
 	if (err != nil) {
 		fmt.Println("err, dir is exist")
 	}
