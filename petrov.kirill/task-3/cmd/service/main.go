@@ -95,11 +95,11 @@ func main() {
   var conf Conf
   err = yaml.Unmarshal(f, &conf)
 	if (err != nil) {
-		panic("YAML unmarshal not works")
+		panic(err)
 	}
 	f2, err := os.ReadFile(conf.Inp)
 	if (err != nil) {
-		panic("Read of input not work")
+		panic(err)
 	}
 	var vc Valc
 	dec := xml.NewDecoder(bytes.NewReader(f2))
