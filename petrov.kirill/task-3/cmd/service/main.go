@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"flag"
-	"fmt"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -89,7 +88,6 @@ func VtJ(vals []Valu) []jsonsave {
 func main() {
 	yml := flag.String("config", "", "way to config")
 	flag.Parse()
-	fmt.Println(*yml)
 	f, err := os.ReadFile(*yml)
 	if (err != nil) {
 		panic("Read config not works")
@@ -99,7 +97,6 @@ func main() {
 	if (err != nil) {
 		panic("YAML unmarshal not works")
 	}
-  fmt.Println(conf.Inp)
 	f2, err := os.ReadFile(conf.Inp)
 	if (err != nil) {
 		panic("Read of input not work")
@@ -112,23 +109,22 @@ func main() {
 		panic("Decoder of xml lists works bad")
 	}
 	vc.Vals = sortvalu(vc.Vals)
-	fmt.Println(vc.Vals[0])
-	fmt.Println(vc.Vals[len(vc.Vals) - 1])
 	js := VtJ(vc.Vals)
-	fmt.Println(js[0].Charc)
 	aaa, err := json.Marshal(js)
 	if (err != nil) {
 		panic("Perevod v jeysons not work")
 	}
-	fmt.Println(string(aaa))
 	err = os.MkdirAll(filepath.Dir(conf.Out), 0777)
 	if (err != nil) {
-		fmt.Println("err, dir is exist")
+		panic(err)
 	}
 	f3, err := os.Create(conf.Out)
 	if (err != nil) {
 		panic(err)
 	}
-	f3.WriteString(string(aaa))
+	_, err = f3.WriteString(string(aaa))
+	if (err != nil) {
+		panic(err)
+	}
 	f3.Close()
 }
