@@ -88,6 +88,7 @@ func vtj1(aaa Valu) jsonsave {
 
 func VtJ(vals []Valu) []jsonsave {
 	js := make([]jsonsave, 0, len(vals))
+
 	for i := range vals {
 		js = append(js, vtj1(vals[i]))
 	}
@@ -99,23 +100,28 @@ func main() {
 	yml := flag.String("config", "", "way to config")
 	flag.Parse()
 
-	f, err := os.ReadFile(*yml)
+	fff, err := os.ReadFile(*yml)
 	if err != nil {
 		panic("Read config not works")
 	}
 
 	var conf Conf
-	err = yaml.Unmarshal(f, &conf)
+
+	err = yaml.Unmarshal(fff, &conf)
 	if err != nil {
 		panic(err)
 	}
+
 	f21, err := os.ReadFile(conf.Inp)
 	if err != nil {
 		panic(err)
 	}
+
 	var vac Valc
+
 	dec := xml.NewDecoder(bytes.NewReader(f21))
 	dec.CharsetReader = charset.NewReaderLabel
+
 	err = dec.Decode(&vac)
 	if err != nil {
 		panic("Decoder of xml lists works bad")
@@ -123,10 +129,13 @@ func main() {
 
 	vac.Vals = sortvalu(vac.Vals)
 	js := VtJ(vac.Vals)
+
 	aaa, err := json.Marshal(js)
+
 	if err != nil {
 		panic("Perevod v jeysons not work")
 	}
+
 	err = os.MkdirAll(filepath.Dir(conf.Out), prava)
 	if err != nil {
 		panic("mkdir err")
