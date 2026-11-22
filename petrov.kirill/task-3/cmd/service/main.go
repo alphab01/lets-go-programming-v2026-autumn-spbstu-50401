@@ -76,6 +76,18 @@ func VtJ(vals []Valu) []jsonsave {
 	return js
 }
 
+func getdir(s string) string {
+	s1 := ""
+	for i := 0; i < len(s); i++ {
+		if (string(s[i]) == "/") {
+			return s1
+		} else {
+			s1 += string(s[i])
+		}
+	}
+	return s1
+}
+
 func main() {
 	yml := flag.String("config", "", "way to config")
 	flag.Parse()
@@ -96,6 +108,19 @@ func main() {
 	fmt.Println(js[0].Charc)
 	aaa, _ := json.Marshal(js)
 	fmt.Println(string(aaa))
-	f3, _ := os.Create(conf.Out)
-	f3.WriteString(string(aaa))
+	err := os.Mkdir(getdir(conf.Out), 0777)
+	if (err != nil) {
+		fmt.Println("err, dir is exist")
+	}
+	f3, err := os.Create(conf.Out)
+	if (err != nil) {
+		f4, err := os.Open(conf.Out)
+		if (err != nil) {
+			fmt.Println(err)
+			return
+		}
+		f4.WriteString(string(aaa))
+	} else {
+		f3.WriteString(string(aaa))
+	}
 }
