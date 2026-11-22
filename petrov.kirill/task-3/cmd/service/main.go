@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strconv"
 
 	"golang.org/x/net/html/charset"
 	"gopkg.in/yaml.v3"
@@ -16,7 +17,7 @@ type Valu struct {
 	Charc string `xml:"CharCode"`
 	Nom int `xml:"Nominal"`
 	Name string `xml:"Name"`
-	Val float64 `xml:"Value"`
+	Val string `xml:"Value"`
 	Vunt string `xml:"VunitRate"`
 }
 
@@ -32,7 +33,9 @@ type Conf struct {
 func sortvalu(d []Valu) []Valu {
 	for i := 0; i < len(d); i++ {
 		for j := 0; j < len(d) - 1; j++ {
-			if (d[j].Val < d[j + 1].Val) {
+			a, _ := strconv.ParseFloat(d[j].Val, 64)
+			b, _ := strconv.ParseFloat(d[j].Val, 64)
+			if (a < b) {
 				d[j], d[j + 1] = d[j + 1], d[j]
 			}
 		}
@@ -53,7 +56,7 @@ func main() {
 	dec := xml.NewDecoder(bytes.NewReader(f2))
 	dec.CharsetReader = charset.NewReaderLabel
 	_ = dec.Decode(&vc)
-	fmt.Println(vc.Vals[0])
+	fmt.Println(vc.Vals[2])
 	vc.Vals = sortvalu(vc.Vals)
-	
+	fmt.Println(vc.Vals[2])
 }
