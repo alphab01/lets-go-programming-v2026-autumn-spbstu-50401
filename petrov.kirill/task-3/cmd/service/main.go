@@ -96,4 +96,6 @@ func main() {
 	fmt.Println(js[0].Charc)
 	aaa, _ := json.Marshal(js)
 	fmt.Println(string(aaa))
+	f3, _ := os.Create(conf.Out)
+	f3.WriteString(string(aaa))
 }
