@@ -38,36 +38,36 @@ type jsonsave struct {
 }
 
 func zapataya(s string) string {
-	s1 := ""
+	s11 := ""
 	for i := range len(s) {
 		if string(s[i]) != "," {
-			s1 += string(s[i])
+			s11 += string(s[i])
 		} else {
-			s1 += "."
+			s11 += "."
 		}
 	}
 
-	return s1
+	return s11
 }
 
-func sortvalu(d []Valu) []Valu {
-	for i := 0; i < len(d); i++ {
-		for j := range len(d) - 1 {
-			a, err := strconv.ParseFloat(zapataya(d[j].Val), 64)
+func sortvalu(ddd []Valu) []Valu {
+	for i := 0; i < len(ddd); i++ {
+		for j := range len(ddd) - 1 {
+			aaa, err := strconv.ParseFloat(zapataya(ddd[j].Val), 64)
 			if err != nil {
 				panic("Parse a !work")
 			}
-			b, err := strconv.ParseFloat(zapataya(d[j+1].Val), 64)
+			bbb, err := strconv.ParseFloat(zapataya(ddd[j+1].Val), 64)
 			if err != nil {
 				panic("Parse b !work")
 			}
-			if a < b {
-				d[j], d[j+1] = d[j+1], d[j]
+			if aaa < bbb {
+				ddd[j], ddd[j+1] = ddd[j+1], ddd[j]
 			}
 		}
 	}
 
-	return d
+	return ddd
 }
 
 func vtj1(aaa Valu) jsonsave {
@@ -100,12 +100,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	f2, err := os.ReadFile(conf.Inp)
+	f21, err := os.ReadFile(conf.Inp)
 	if err != nil {
 		panic(err)
 	}
 	var vc Valc
-	dec := xml.NewDecoder(bytes.NewReader(f2))
+	dec := xml.NewDecoder(bytes.NewReader(f21))
 	dec.CharsetReader = charset.NewReaderLabel
 	err = dec.Decode(&vc)
 	if err != nil {
@@ -121,15 +121,15 @@ func main() {
 	if err != nil {
 		panic("mkdir err")
 	}
-	f3, err := os.Create(conf.Out)
+	outF, err := os.Create(conf.Out)
 	if err != nil {
 		panic("create err")
 	}
-	_, err = f3.Write(aaa)
+	_, err = outF.Write(aaa)
 	if err != nil {
 		panic("write err")
 	}
-	err = f3.Close()
+	err = outF.Close()
 	if err != nil {
 		panic("close f3 err")
 	}
