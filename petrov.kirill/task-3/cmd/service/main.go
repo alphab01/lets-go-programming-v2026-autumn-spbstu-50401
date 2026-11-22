@@ -10,6 +10,13 @@ func main() {
 	yml := flag.String("config", "", "way to config")
 	flag.Parse()
 	fmt.Println(*yml)
-	d, _ := os.ReadFile(*yml)
-	fmt.Println(string(d))
+	f, _ := os.Open(*yml)
+	buf := make([]byte, 1000)
+	for {
+		d, err := f.Read(buf)
+		if (err != nil) {
+			break
+		}
+		fmt.Println(string(buf[:d]))
+	}
 }
