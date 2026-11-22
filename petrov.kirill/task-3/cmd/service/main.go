@@ -39,19 +39,20 @@ type jsonsave struct {
 
 func zapataya(s string) string {
 	s1 := ""
-	for i := 0; i < len(s); i++ {
+	for i := range len(s) {
 		if string(s[i]) != "," {
 			s1 += string(s[i])
 		} else {
 			s1 += "."
 		}
 	}
+
 	return s1
 }
 
 func sortvalu(d []Valu) []Valu {
 	for i := 0; i < len(d); i++ {
-		for j := 0; j < len(d)-1; j++ {
+		for j := range len(d) - 1 {
 			a, err := strconv.ParseFloat(zapataya(d[j].Val), 64)
 			if err != nil {
 				panic("Parse a !work")
@@ -65,6 +66,7 @@ func sortvalu(d []Valu) []Valu {
 			}
 		}
 	}
+
 	return d
 }
 
@@ -74,12 +76,13 @@ func vtj1(aaa Valu) jsonsave {
 		panic("parsing to float not work")
 	}
 	q := jsonsave{Numc: aaa.Numc, Charc: aaa.Charc, Val: ddd}
+
 	return q
 }
 
 func VtJ(vals []Valu) []jsonsave {
 	var js []jsonsave
-	for i := 0; i < len(vals); i++ {
+	for i := range len(vals) {
 		js = append(js, vtj1(vals[i]))
 	}
 	return js
@@ -114,7 +117,7 @@ func main() {
 	if err != nil {
 		panic("Perevod v jeysons not work")
 	}
-	err = os.MkdirAll(filepath.Dir(conf.Out), 0777)
+	err = os.MkdirAll(filepath.Dir(conf.Out), 0o777)
 	if err != nil {
 		panic("mkdir err")
 	}
@@ -122,7 +125,7 @@ func main() {
 	if err != nil {
 		panic("create err")
 	}
-	_, err = f3.WriteString(string(aaa))
+	_, err = f3.Write(aaa)
 	if err != nil {
 		panic("write err")
 	}
