@@ -10,8 +10,17 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+type Valu struct {
+	Numc string `xml:"NumCode"`
+	Charc string `xml:"CharCode"`
+	Nom string `xml:"Nominal"`
+	Name string `xml:"Name"`
+	Val string `xml:"Value"`
+	Vunt string `xml:"VunitRate"`
+}
+
 type Valc struct {
-	Vals string `xml:"Valute"`
+	Vals []Valu `xml:"Valute"`
 }
 
 type Conf struct {
@@ -29,6 +38,6 @@ func main() {
   fmt.Println(conf.Inp)
 	f2, _ := os.ReadFile(conf.Inp)
 	var vc Valc
-	_ = xml.Unmarshal(f2, vc)
-	fmt.Println(vc)
+	_ = xml.Unmarshal(f2, &vc)
+	fmt.Println(vc.Vals[0])
 }
