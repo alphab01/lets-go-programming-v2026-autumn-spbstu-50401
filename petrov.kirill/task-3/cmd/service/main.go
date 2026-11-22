@@ -13,6 +13,8 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+const prava = 0o777
+
 type Valu struct {
 	Numc  int    `xml:"NumCode"`
 	Charc string `xml:"CharCode"`
@@ -39,6 +41,7 @@ type jsonsave struct {
 
 func zapataya(s string) string {
 	s11 := ""
+
 	for i := range len(s) {
 		if string(s[i]) != "," {
 			s11 += string(s[i])
@@ -52,17 +55,19 @@ func zapataya(s string) string {
 
 func sortvalu(ddd []Valu) []Valu {
 	for i := 0; i < len(ddd); i++ {
-		for j := range len(ddd) - 1 {
-			aaa, err := strconv.ParseFloat(zapataya(ddd[j].Val), 64)
+		for jjj := range len(ddd) - 1 {
+			aaa, err := strconv.ParseFloat(zapataya(ddd[jjj].Val), 64)
 			if err != nil {
 				panic("Parse a !work")
 			}
-			bbb, err := strconv.ParseFloat(zapataya(ddd[j+1].Val), 64)
+
+			bbb, err := strconv.ParseFloat(zapataya(ddd[jjj+1].Val), 64)
 			if err != nil {
 				panic("Parse b !work")
 			}
+
 			if aaa < bbb {
-				ddd[j], ddd[j+1] = ddd[j+1], ddd[j]
+				ddd[jjj], ddd[jjj+1] = ddd[jjj+1], ddd[jjj]
 			}
 		}
 	}
@@ -75,26 +80,30 @@ func vtj1(aaa Valu) jsonsave {
 	if err != nil {
 		panic("parsing to float not work")
 	}
+
 	q := jsonsave{Numc: aaa.Numc, Charc: aaa.Charc, Val: ddd}
 
 	return q
 }
 
 func VtJ(vals []Valu) []jsonsave {
-	var js []jsonsave
-	for i := range len(vals) {
+	js := make([]jsonsave, 0, len(vals))
+	for i := range vals {
 		js = append(js, vtj1(vals[i]))
 	}
+
 	return js
 }
 
 func main() {
 	yml := flag.String("config", "", "way to config")
 	flag.Parse()
+
 	f, err := os.ReadFile(*yml)
 	if err != nil {
 		panic("Read config not works")
 	}
+
 	var conf Conf
 	err = yaml.Unmarshal(f, &conf)
 	if err != nil {
@@ -104,31 +113,35 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	var vc Valc
+	var vac Valc
 	dec := xml.NewDecoder(bytes.NewReader(f21))
 	dec.CharsetReader = charset.NewReaderLabel
-	err = dec.Decode(&vc)
+	err = dec.Decode(&vac)
 	if err != nil {
 		panic("Decoder of xml lists works bad")
 	}
-	vc.Vals = sortvalu(vc.Vals)
-	js := VtJ(vc.Vals)
+
+	vac.Vals = sortvalu(vac.Vals)
+	js := VtJ(vac.Vals)
 	aaa, err := json.Marshal(js)
 	if err != nil {
 		panic("Perevod v jeysons not work")
 	}
-	err = os.MkdirAll(filepath.Dir(conf.Out), 0o777)
+	err = os.MkdirAll(filepath.Dir(conf.Out), prava)
 	if err != nil {
 		panic("mkdir err")
 	}
+
 	outF, err := os.Create(conf.Out)
 	if err != nil {
 		panic("create err")
 	}
+
 	_, err = outF.Write(aaa)
 	if err != nil {
 		panic("write err")
 	}
+
 	err = outF.Close()
 	if err != nil {
 		panic("close f3 err")
