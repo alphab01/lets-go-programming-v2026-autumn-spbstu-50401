@@ -116,15 +116,18 @@ func main() {
 	}
 	err = os.MkdirAll(filepath.Dir(conf.Out), 0777)
 	if (err != nil) {
-		panic(err)
+		panic("mkdir err")
 	}
 	f3, err := os.Create(conf.Out)
 	if (err != nil) {
-		panic(err)
+		panic("create err")
 	}
 	_, err = f3.WriteString(string(aaa))
 	if (err != nil) {
-		panic(err)
+		panic("write err")
 	}
-	f3.Close()
+	err = f3.Close()
+	if (err != nil) {
+		panic("close f3 err")
+	}
 }
