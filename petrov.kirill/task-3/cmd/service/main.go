@@ -81,7 +81,10 @@ func main() {
 	yml := flag.String("config", "", "way to config")
 	flag.Parse()
 	fmt.Println(*yml)
-	f, _ := os.ReadFile(*yml)
+	f, err := os.ReadFile(*yml)
+	if (err != nil) {
+		panic("ReadFile not works")
+	}
   var conf Conf
   _ = yaml.Unmarshal(f, &conf)
   fmt.Println(conf.Inp)
@@ -103,13 +106,8 @@ func main() {
 	}
 	f3, err := os.Create(conf.Out)
 	if (err != nil) {
-		f4, err := os.Open(conf.Out)
-		if (err != nil) {
-			fmt.Println(err)
-			return
-		}
-		f4.WriteString(string(aaa))
-	} else {
-		f3.WriteString(string(aaa))
+		panic(err)
 	}
+	f3.WriteString(string(aaa))
+	f3.Close()
 }
