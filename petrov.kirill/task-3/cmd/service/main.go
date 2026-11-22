@@ -87,13 +87,13 @@ func vtj1(aaa Valu) jsonsave {
 }
 
 func VtJ(vals []Valu) []jsonsave {
-	js := make([]jsonsave, 0, len(vals))
+	js1 := make([]jsonsave, 0, len(vals))
 
 	for i := range vals {
-		js = append(js, vtj1(vals[i]))
+		js1 = append(js1, vtj1(vals[i]))
 	}
 
-	return js
+	return js1
 }
 
 func main() {
@@ -131,7 +131,6 @@ func main() {
 	js := VtJ(vac.Vals)
 
 	aaa, err := json.Marshal(js)
-
 	if err != nil {
 		panic("Perevod v jeysons not work")
 	}
