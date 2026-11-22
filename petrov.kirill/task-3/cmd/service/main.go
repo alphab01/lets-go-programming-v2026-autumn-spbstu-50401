@@ -30,6 +30,12 @@ type Conf struct {
   Out string `yaml:"output-file"`
 }
 
+type jsonsave struct {
+	Numc int
+	Charc string
+	Val float64	
+}
+
 func zapataya(s string) string {
 	s1 := ""
 	for i := 0; i < len(s); i++ {
@@ -55,6 +61,20 @@ func sortvalu(d []Valu) []Valu {
 	return d
 }
 
+func vtj1(aaa Valu) jsonsave {
+	ddd, _ := strconv.ParseFloat(aaa.Val, 64)
+	q := jsonsave{Numc: aaa.Numc, Charc: aaa.Charc, Val: ddd}
+	return q
+}
+
+func VtJ(vals []Valu) []jsonsave {
+	var js []jsonsave
+	for i := 0; i < len(vals); i++ {
+		js = append(js, vtj1(vals[i]))
+	}
+	return js
+}
+
 func main() {
 	yml := flag.String("config", "", "way to config")
 	flag.Parse()
@@ -68,7 +88,9 @@ func main() {
 	dec := xml.NewDecoder(bytes.NewReader(f2))
 	dec.CharsetReader = charset.NewReaderLabel
 	_ = dec.Decode(&vc)
-	fmt.Println(vc.Vals[0])
 	vc.Vals = sortvalu(vc.Vals)
 	fmt.Println(vc.Vals[0])
+	fmt.Println(vc.Vals[len(vc.Vals) - 1])
+	js := VtJ(vc.Vals)
+	fmt.Println(js[0].Charc)
 }
