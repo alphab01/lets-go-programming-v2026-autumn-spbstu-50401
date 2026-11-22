@@ -53,8 +53,14 @@ func zapataya(s string) string {
 func sortvalu(d []Valu) []Valu {
 	for i := 0; i < len(d); i++ {
 		for j := 0; j < len(d) - 1; j++ {
-			a, _ := strconv.ParseFloat(zapataya(d[j].Val), 64)
-			b, _ := strconv.ParseFloat(zapataya(d[j + 1].Val), 64)
+			a, err := strconv.ParseFloat(zapataya(d[j].Val), 64)
+			if (err != nil) {
+				panic("Parse a !work")
+			}
+			b, err := strconv.ParseFloat(zapataya(d[j + 1].Val), 64)
+			if (err != nil) {
+				panic("Parse b !work")
+			}
 			if (a < b) {
 				d[j], d[j + 1] = d[j + 1], d[j]
 			}
@@ -64,7 +70,10 @@ func sortvalu(d []Valu) []Valu {
 }
 
 func vtj1(aaa Valu) jsonsave {
-	ddd, _ := strconv.ParseFloat(zapataya(aaa.Val), 64)
+	ddd, err := strconv.ParseFloat(zapataya(aaa.Val), 64)
+	if (err != nil) {
+		panic("parsing to float not work")
+	}
 	q := jsonsave{Numc: aaa.Numc, Charc: aaa.Charc, Val: ddd}
 	return q
 }
@@ -83,24 +92,36 @@ func main() {
 	fmt.Println(*yml)
 	f, err := os.ReadFile(*yml)
 	if (err != nil) {
-		panic("ReadFile not works")
+		panic("Read config not works")
 	}
   var conf Conf
-  _ = yaml.Unmarshal(f, &conf)
+  err = yaml.Unmarshal(f, &conf)
+	if (err != nil) {
+		panic("YAML unmarshal not works")
+	}
   fmt.Println(conf.Inp)
-	f2, _ := os.ReadFile(conf.Inp)
+	f2, err := os.ReadFile(conf.Inp)
+	if (err != nil) {
+		panic("Read of input not work")
+	}
 	var vc Valc
 	dec := xml.NewDecoder(bytes.NewReader(f2))
 	dec.CharsetReader = charset.NewReaderLabel
-	_ = dec.Decode(&vc)
+	err = dec.Decode(&vc)
+	if (err != nil) {
+		panic("Decoder of xml lists works bad")
+	}
 	vc.Vals = sortvalu(vc.Vals)
 	fmt.Println(vc.Vals[0])
 	fmt.Println(vc.Vals[len(vc.Vals) - 1])
 	js := VtJ(vc.Vals)
 	fmt.Println(js[0].Charc)
-	aaa, _ := json.Marshal(js)
+	aaa, err := json.Marshal(js)
+	if (err != nil) {
+		panic("Perevod v jeysons not work")
+	}
 	fmt.Println(string(aaa))
-	err := os.MkdirAll(filepath.Dir(conf.Out), 0777)
+	err = os.MkdirAll(filepath.Dir(conf.Out), 0777)
 	if (err != nil) {
 		fmt.Println("err, dir is exist")
 	}
