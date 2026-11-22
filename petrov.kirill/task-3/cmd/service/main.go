@@ -1,12 +1,13 @@
 package main
 
 import (
+	"bytes"
+	"encoding/xml"
 	"flag"
 	"fmt"
 	"os"
 
-	"encoding/xml"
-
+	"golang.org/x/net/html/charset"
 	"gopkg.in/yaml.v3"
 )
 
@@ -38,6 +39,8 @@ func main() {
   fmt.Println(conf.Inp)
 	f2, _ := os.ReadFile(conf.Inp)
 	var vc Valc
-	_ = xml.Unmarshal(f2, &vc)
+	dec := xml.NewDecoder(bytes.NewReader(f2))
+	dec.CharsetReader = charset.NewReaderLabel
+	_ = dec.Decode(&vc)
 	fmt.Println(vc.Vals[0])
 }
