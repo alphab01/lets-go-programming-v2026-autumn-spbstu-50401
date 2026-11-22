@@ -12,11 +12,11 @@ import (
 )
 
 type Valu struct {
-	Numc string `xml:"NumCode"`
+	Numc int `xml:"NumCode"`
 	Charc string `xml:"CharCode"`
-	Nom string `xml:"Nominal"`
+	Nom int `xml:"Nominal"`
 	Name string `xml:"Name"`
-	Val string `xml:"Value"`
+	Val float64 `xml:"Value"`
 	Vunt string `xml:"VunitRate"`
 }
 
