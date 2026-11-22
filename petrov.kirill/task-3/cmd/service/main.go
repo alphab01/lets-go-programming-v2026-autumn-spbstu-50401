@@ -29,6 +29,17 @@ type Conf struct {
   Out string `yaml:"output-file"`
 }
 
+func sortvalu(d []Valu) []Valu {
+	for i := 0; i < len(d); i++ {
+		for j := 0; j < len(d) - 1; j++ {
+			if (d[j].Val < d[j + 1].Val) {
+				d[j], d[j + 1] = d[j + 1], d[j]
+			}
+		}
+	}
+	return d
+}
+
 func main() {
 	yml := flag.String("config", "", "way to config")
 	flag.Parse()
@@ -43,4 +54,6 @@ func main() {
 	dec.CharsetReader = charset.NewReaderLabel
 	_ = dec.Decode(&vc)
 	fmt.Println(vc.Vals[0])
+	vc.Vals = sortvalu(vc.Vals)
+	
 }
