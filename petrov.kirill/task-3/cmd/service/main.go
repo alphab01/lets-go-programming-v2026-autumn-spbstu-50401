@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"encoding/xml"
 	"flag"
 	"fmt"
@@ -31,9 +32,9 @@ type Conf struct {
 }
 
 type jsonsave struct {
-	Numc int
-	Charc string
-	Val float64	
+	Numc int `json:"num_code"`
+	Charc string `json:"char_code"`
+	Val float64	`json:"value"`
 }
 
 func zapataya(s string) string {
@@ -62,7 +63,7 @@ func sortvalu(d []Valu) []Valu {
 }
 
 func vtj1(aaa Valu) jsonsave {
-	ddd, _ := strconv.ParseFloat(aaa.Val, 64)
+	ddd, _ := strconv.ParseFloat(zapataya(aaa.Val), 64)
 	q := jsonsave{Numc: aaa.Numc, Charc: aaa.Charc, Val: ddd}
 	return q
 }
@@ -93,4 +94,6 @@ func main() {
 	fmt.Println(vc.Vals[len(vc.Vals) - 1])
 	js := VtJ(vc.Vals)
 	fmt.Println(js[0].Charc)
+	aaa, _ := json.Marshal(js)
+	fmt.Println(string(aaa))
 }
